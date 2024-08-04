@@ -60,8 +60,13 @@ class SecurityConfig {
             .csrf {
                 // 추후 구현
             }
-            .sessionManagement {
+            .sessionManagement { it ->
                 it.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) // 인증된 사용자에게만 Session 을 생성하도록 지정
+                it.sessionConcurrency{
+                    // 해당 설정을 통해 한 유저당 세션은 1개로 제한하고 두번째 로그인시 첫번째 세션을 무효화 하도록 설정 할수 있다.
+                    concurrency -> concurrency.maximumSessions(1)
+                    concurrency.maxSessionsPreventsLogin(true)
+                }
             }
 
         return http.build()
