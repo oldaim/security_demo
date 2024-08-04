@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository
-import org.springframework.security.web.context.RequestAttributeSecurityContextRepository
 import org.toy.security_demo.SecurityDemoApplication
 
 @EnableWebSecurity
