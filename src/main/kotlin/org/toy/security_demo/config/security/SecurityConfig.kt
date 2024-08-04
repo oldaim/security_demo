@@ -25,7 +25,7 @@ class SecurityConfig {
         private const val SESSION_BASE_URI = "/api/session/**" // Session 방식 테스트를 위한 BASE_URI
     }
 
-    @Bean(name = ["BaseSecurityConfig"])
+    @Bean(name = ["SessionSecurityConfig"])
     fun sessionFilterChain(http: HttpSecurity, securityDemoApplication: SecurityDemoApplication): SecurityFilterChain{
 
         /*
