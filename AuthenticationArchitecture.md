@@ -19,7 +19,7 @@ SpringSecurity 는 어떻게 값이 채워지는지에 대해서는 신경쓰지
 ```kotlin
     val context: SecurityContext = SecurityContextHolder.createEmptyContext() 
     val authentication: Authentication = TestingAuthenticationToken("username", "password", "ROLE_USER") 
-    context.authentication = authentication
+    //context.authentication = authentication
     SecurityContextHolder.setContext(context)
 ```
 SecurityContext 는 빈 상태로 생성 되어야 한다. 
