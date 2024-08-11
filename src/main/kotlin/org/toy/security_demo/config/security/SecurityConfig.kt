@@ -23,6 +23,7 @@ class SecurityConfig {
 
     companion object{
         private const val SESSION_BASE_URI = "/api/session/**" // Session 방식 테스트를 위한 BASE_URI
+        private const val INVALID_SESSION_URI = "/timeout"
     }
 
     @Bean(name = ["SessionSecurityConfig"])
@@ -60,13 +61,18 @@ class SecurityConfig {
             .csrf {
                 // 추후 구현
             }
-            .sessionManagement { it ->
+            .sessionManagement {
+
                 it.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) // 인증된 사용자에게만 Session 을 생성하도록 지정
+
                 it.sessionConcurrency{
                     // 해당 설정을 통해 한 유저당 세션은 1개로 제한하고 두번째 로그인시 첫번째 세션을 무효화 하도록 설정 할수 있다.
                     concurrency -> concurrency.maximumSessions(1)
                     concurrency.maxSessionsPreventsLogin(true)
                 }
+
+                it.invalidSessionUrl(INVALID_SESSION_URI) // 세션 타임 아웃이 된 요청을 Redirect 하는 과정
+                // it.invalidSessionStrategy() 타임 아웃이 된 세션을 어떻게 처리할지 에 대한 전략 default 설정은 SimpleRedirectInvalidSessionStrategy
             }
 
         return http.build()
